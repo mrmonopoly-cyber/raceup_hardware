@@ -5,21 +5,18 @@ C_EXFLAGS =
 raceup_hardware := $(or $(RACEUP_HW_ROOT), .)
 raceup_hw.c := $(raceup_hardware)/raceup_hw.c
 
-all: release
+ifndef $(RACEUP_HW_CAN_ROOT)
+	RACEUP_HW_CAN_ROOT := $(raceup_hardware)/src/can
+	include $(RACEUP_HW_CAN_ROOT)/Makefile
+endif
 
-DEBUG_FLAGS = -O0 -fsanitize=address -g
-RELEASE_FLAGS = -O2
+ifndef $(RACEUP_HW_SERIAL_ROOT)
+	RACEUP_HW_SERIAL_ROOT := $(raceup_hardware)/src/serial
+	include $(RACEUP_HW_SERIAL_ROOT)/Makefile
+endif
 
-debug: C_FLAGS += $(DEBUG_FLAGS)
-debug: clean compile
+ifndef $(RACEUP_HW_PINS_ROOT)
+	RACEUP_HW_PINS_ROOT := $(raceup_hardware)/src/pins
+	include $(RACEUP_HW_PINS_ROOT)/Makefile
+endif
 
-release: C_FLAGS += $(RELEASE_FLAGS)
-release: clean compile
-
-compile: raceup_hw
-
-raceup_hw: $(raceup_hw.c)
-	$(CC) $(C_FLAGS) $(C_EXFLAGS) $(raceup_hw.c) -c
-
-clean: 
-	rm -f ./*.o
