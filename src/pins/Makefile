@@ -1,6 +1,8 @@
+ifndef CC
 CC = gcc
 C_FLAGS = -Wall -Wextra
 C_EXFLAGS = 
+endif
 
 raceup_hardware_pins := $(or $(RACEUP_HW_PINS_ROOT), .)
 pins.c := $(raceup_hardware_pins)/pins.c

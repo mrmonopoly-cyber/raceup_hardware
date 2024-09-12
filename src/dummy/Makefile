@@ -1,6 +1,8 @@
+ifndef CC
 CC = gcc
 C_FLAGS = -Wall -Wextra
 C_EXFLAGS = 
+endif
 
 raceup_hardware_dummy := $(or $(RACEUP_HW_DUMMY_ROOT), .)
 dummy.c := $(raceup_hardware_dummy)/dummy.c

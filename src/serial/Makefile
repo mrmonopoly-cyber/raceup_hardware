@@ -1,6 +1,8 @@
+ifndef CC
 CC = gcc
 C_FLAGS = -Wall -Wextra
 C_EXFLAGS = 
+endif
 
 raceup_hardware_serial := $(or $(RACEUP_HW_SERIAL_ROOT), .)
 serial.c := $(raceup_hardware_serial)/serial.c
