@@ -25,6 +25,11 @@ ifndef $(RACEUP_HW_PINS_ROOT)
 	include $(RACEUP_HW_PINS_ROOT)/Makefile
 endif
 
+ifndef $(RACEUP_HW_VIRTUAL_ROOT)
+	RACEUP_HW_VIRTUAL_ROOT := $(raceup_hardware)/src/virtual
+	include $(RACEUP_HW_VIRTUAL_ROOT)/Makefile
+endif
+
 all: release
 
 debug: C_FLAGS += $(DEBUG_FLAGS)
